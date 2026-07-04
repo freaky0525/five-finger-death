@@ -1,0 +1,269 @@
+[gd_scene load_steps=22 format=3 uid="uid://d2melecxcqrfu"]
+
+[ext_resource type="PackedScene" uid="uid://cepo2xhyk4vm8" path="res://Player/player.tscn" id="1_3hls8"]
+[ext_resource type="Texture2D" uid="uid://cr6hsci5elsc0" path="res://asset/environment/floor_dist.png" id="2_hbghi"]
+[ext_resource type="Texture2D" uid="uid://ccuksa2t7wixu" path="res://asset/environment/wall.png" id="3_hn12h"]
+[ext_resource type="PackedScene" uid="uid://dqdmgb7wgj560" path="res://Enemy/Melee/enemy_melee.tscn" id="4_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://cye7rf76bsp0f" path="res://Enemy/Spawner/enemy_spawner.tscn" id="5_j7kpp"]
+[ext_resource type="AudioStream" uid="uid://cpynyctj5mk0d" path="res://asset/audio/Five Finger Death bg music.mp3" id="5_rka8t"]
+[ext_resource type="PackedScene" uid="uid://cpboq1sips5vm" path="res://Enemy/Shooter/enemy_shooter.tscn" id="6_5hph3"]
+[ext_resource type="PackedScene" uid="uid://baihnlw3t3bnn" path="res://Enemy/Triggers/battle_trigger.tscn" id="7_bjebc"]
+[ext_resource type="Script" uid="uid://c8level1mgr01" path="res://scenes/level_1/level_1.gd" id="8_lvl1"]
+[ext_resource type="PackedScene" uid="uid://cwave0one001" path="res://Enemy/Waves/wave_zone.tscn" id="9_wzone"]
+[ext_resource type="Script" uid="uid://bty616xcalvhj" path="res://ui/finger_health_ui.gd" id="10_65or1"]
+[ext_resource type="Texture2D" uid="uid://bfw8h0sxt4k6n" path="res://asset/ui/health/palm.png" id="10_ubhxj"]
+[ext_resource type="Texture2D" uid="uid://cf83o4lahys8h" path="res://asset/ui/health/pinky.png" id="11_65or1"]
+[ext_resource type="Texture2D" uid="uid://cfwehk1r6uyvn" path="res://asset/ui/health/ring.png" id="12_lhbbi"]
+[ext_resource type="Texture2D" uid="uid://dbvnv4ipuabe6" path="res://asset/ui/health/middle.png" id="13_gjkv5"]
+[ext_resource type="Texture2D" uid="uid://cm36eb1mqmwdm" path="res://asset/ui/health/index.png" id="14_00ld1"]
+[ext_resource type="Texture2D" uid="uid://idywofr1m4qt" path="res://asset/ui/health/thumb.png" id="15_3qmij"]
+[ext_resource type="PackedScene" uid="uid://cteleport001" path="res://world/teleporter.tscn" id="16_tp"]
+[ext_resource type="Script" uid="uid://dcigui001" path="res://ui/cigarette_ui.gd" id="17_cigui"]
+[ext_resource type="Texture2D" uid="uid://276kdot5qsn6" path="res://asset/items/cigar.png" id="18_cig"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hbghi"]
+
+[node name="Level1" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("8_lvl1")
+
+[node name="Wall" type="TextureRect" parent="."]
+z_index = -1
+offset_top = -1056.0
+offset_right = 17982.0
+offset_bottom = 24.0
+texture = ExtResource("3_hn12h")
+stretch_mode = 1
+
+[node name="Floor" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="floor" type="TextureRect" parent="Floor"]
+offset_right = 17983.0
+offset_bottom = 1227.0
+texture = ExtResource("2_hbghi")
+stretch_mode = 1
+
+[node name="top_border" type="CollisionShape2D" parent="Floor"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_hbghi")
+
+[node name="left_border" type="CollisionShape2D" parent="Floor"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_hbghi")
+
+[node name="down_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 597)
+shape = SubResource("WorldBoundaryShape2D_hbghi")
+
+[node name="right_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(17980.5, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_hbghi")
+
+[node name="Player" parent="." instance=ExtResource("1_3hls8")]
+position = Vector2(-17453, 43)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rka8t")
+autoplay = true
+
+[node name="Wall2" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17982.0
+offset_top = -1080.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_hn12h")
+stretch_mode = 1
+
+[node name="floor" type="TextureRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17983.0
+offset_bottom = 1227.0
+grow_horizontal = 0
+texture = ExtResource("2_hbghi")
+stretch_mode = 1
+
+[node name="Wave1" parent="." instance=ExtResource("7_bjebc")]
+position = Vector2(1276, 296)
+
+[node name="Wave1_2" parent="." instance=ExtResource("7_bjebc")]
+position = Vector2(1064, 270)
+
+[node name="Wave1Melee1" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(3225, 353)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 1
+
+[node name="Wave1Melee2" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(3619, 440)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 1
+
+[node name="Wave1Melee3" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(3678, 220)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 1
+
+[node name="Wave1Melee4" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(3444, 73)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 1
+
+[node name="Wave1Zone" parent="." instance=ExtResource("9_wzone")]
+border_left_x = 850.0
+border_right_x = 4300.0
+trigger_paths = Array[NodePath]([NodePath("Wave1"), NodePath("Wave1_2")])
+spawner_paths = Array[NodePath]([NodePath("Wave1Melee1"), NodePath("Wave1Melee2"), NodePath("Wave1Melee3"), NodePath("Wave1Melee4")])
+
+[node name="Wave2" parent="." instance=ExtResource("7_bjebc")]
+position = Vector2(6015, 301)
+
+[node name="Wave2Melee1" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(8722, 83)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 2
+
+[node name="Wave2Melee2" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(8778, 424)
+enemy_scene = ExtResource("4_ihfcg")
+spawn_limit = 1
+
+[node name="Wave2Shooter1" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(9687, 64)
+enemy_scene = ExtResource("6_5hph3")
+spawn_limit = 1
+
+[node name="Wave2Shooter2" parent="." instance=ExtResource("5_j7kpp")]
+position = Vector2(9707, 477)
+enemy_scene = ExtResource("6_5hph3")
+spawn_limit = 1
+
+[node name="Wave2Zone" parent="." instance=ExtResource("9_wzone")]
+border_left_x = 5700.0
+border_right_x = 10500.0
+trigger_paths = Array[NodePath]([NodePath("Wave2")])
+spawner_paths = Array[NodePath]([NodePath("Wave2Melee1"), NodePath("Wave2Melee2"), NodePath("Wave2Shooter1"), NodePath("Wave2Shooter2")])
+
+[node name="Teleporter" parent="." instance=ExtResource("16_tp")]
+position = Vector2(10800, 301)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FingerHealthUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -520.0
+offset_right = 70.0
+offset_bottom = -480.0
+grow_vertical = 0
+script = ExtResource("10_65or1")
+player = NodePath("../../Player")
+
+[node name="Palm" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -323.0
+offset_top = 148.0
+offset_right = 957.0
+offset_bottom = 868.0
+texture = ExtResource("10_ubhxj")
+
+[node name="Thumb" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -347.0
+offset_top = 169.0
+offset_right = 933.0
+offset_bottom = 889.0
+texture = ExtResource("15_3qmij")
+
+[node name="Index" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -311.0
+offset_top = 168.0
+offset_right = 969.0
+offset_bottom = 888.0
+texture = ExtResource("14_00ld1")
+
+[node name="Middle" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 149.0
+offset_right = 955.0
+offset_bottom = 869.0
+texture = ExtResource("13_gjkv5")
+
+[node name="Ring" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 159.0
+offset_right = 955.0
+offset_bottom = 879.0
+texture = ExtResource("12_lhbbi")
+
+[node name="Pinky" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 0
+offset_left = -313.0
+offset_top = 161.0
+offset_right = 967.0
+offset_bottom = 881.0
+pivot_offset = Vector2(40, 150)
+texture = ExtResource("11_65or1")
+
+[node name="CigaretteUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 220.0
+offset_top = -180.0
+offset_right = 420.0
+offset_bottom = -40.0
+grow_vertical = 0
+script = ExtResource("17_cigui")
+player = NodePath("../../Player")
+
+[node name="Pack" type="TextureRect" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("18_cig")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "x0"
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 95.0
+offset_right = 200.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "R"
+
+[connection signal="player_entered_zone" from="Wave1" to="Wave1Melee1" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave1" to="Wave1Melee3" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave1_2" to="Wave1Melee2" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave1_2" to="Wave1Melee4" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave2" to="Wave2Melee1" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave2" to="Wave2Melee2" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave2" to="Wave2Shooter1" method="start_spawning"]
+[connection signal="player_entered_zone" from="Wave2" to="Wave2Shooter2" method="start_spawning"]

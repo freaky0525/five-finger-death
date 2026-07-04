@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cpynyctj5mk0d"
+path="res://.godot/imported/Five Finger Death bg music.mp3-4979837917b0d0e085de37b31ca948d6.mp3str"
+
+[deps]
+
+source_file="res://asset/audio/Five Finger Death bg music.mp3"
+dest_files=["res://.godot/imported/Five Finger Death bg music.mp3-4979837917b0d0e085de37b31ca948d6.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

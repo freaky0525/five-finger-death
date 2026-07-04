@@ -1,0 +1,228 @@
+[gd_scene load_steps=21 format=3 uid="uid://dbossarena001"]
+
+[ext_resource type="PackedScene" uid="uid://cepo2xhyk4vm8" path="res://Player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://cr6hsci5elsc0" path="res://asset/environment/floor_dist.png" id="2_floor"]
+[ext_resource type="Texture2D" uid="uid://ccuksa2t7wixu" path="res://asset/environment/wall.png" id="3_wall"]
+[ext_resource type="AudioStream" uid="uid://cpynyctj5mk0d" path="res://asset/audio/Five Finger Death bg music.mp3" id="4_music"]
+[ext_resource type="PackedScene" uid="uid://baihnlw3t3bnn" path="res://Enemy/Triggers/battle_trigger.tscn" id="5_trigger"]
+[ext_resource type="Script" path="res://scenes/boss_arena/boss_arena.gd" id="6_script"]
+[ext_resource type="PackedScene" uid="uid://ccigpick001" path="res://world/cigarette_pickup.tscn" id="7_pickup"]
+[ext_resource type="Texture2D" uid="uid://clt2b874kpbdq" path="res://asset/enemies/enemy.png" id="8_npc"]
+[ext_resource type="Script" path="res://world/merchant.gd" id="9_merchant"]
+[ext_resource type="Script" path="res://ui/finger_health_ui.gd" id="10_health"]
+[ext_resource type="Texture2D" uid="uid://bfw8h0sxt4k6n" path="res://asset/ui/health/palm.png" id="11_palm"]
+[ext_resource type="Texture2D" uid="uid://cf83o4lahys8h" path="res://asset/ui/health/pinky.png" id="12_pinky"]
+[ext_resource type="Texture2D" uid="uid://cfwehk1r6uyvn" path="res://asset/ui/health/ring.png" id="13_ring"]
+[ext_resource type="Texture2D" uid="uid://dbvnv4ipuabe6" path="res://asset/ui/health/middle.png" id="14_middle"]
+[ext_resource type="Texture2D" uid="uid://cm36eb1mqmwdm" path="res://asset/ui/health/index.png" id="15_index"]
+[ext_resource type="Texture2D" uid="uid://idywofr1m4qt" path="res://asset/ui/health/thumb.png" id="16_thumb"]
+[ext_resource type="Script" path="res://ui/cigarette_ui.gd" id="17_cigui"]
+[ext_resource type="Texture2D" uid="uid://276kdot5qsn6" path="res://asset/items/cigar.png" id="18_cig"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_ui.tscn" id="19_dlg"]
+[ext_resource type="PackedScene" path="res://ui/shop_ui.tscn" id="20_shop"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_floor"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_merchant"]
+size = Vector2(220, 80)
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 200.0
+
+[node name="BossArena" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("6_script")
+
+[node name="Wall" type="TextureRect" parent="."]
+z_index = -1
+offset_top = -1056.0
+offset_right = 8500.0
+offset_bottom = 24.0
+texture = ExtResource("3_wall")
+stretch_mode = 1
+
+[node name="Floor" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="floor" type="TextureRect" parent="Floor"]
+offset_right = 8500.0
+offset_bottom = 1227.0
+texture = ExtResource("2_floor")
+stretch_mode = 1
+
+[node name="top_border" type="CollisionShape2D" parent="Floor"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="left_border" type="CollisionShape2D" parent="Floor"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="down_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 597)
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="right_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(8500, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(400, 300)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_music")
+autoplay = true
+
+[node name="Merchant" type="StaticBody2D" parent="."]
+position = Vector2(2500, 300)
+script = ExtResource("9_merchant")
+
+[node name="Sprite2D" type="Sprite2D" parent="Merchant"]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("8_npc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Merchant"]
+position = Vector2(0, 60)
+shape = SubResource("RectangleShape2D_merchant")
+
+[node name="InteractArea" type="Area2D" parent="Merchant"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Merchant/InteractArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="InteractPrompt" type="Label" parent="Merchant"]
+offset_left = -90.0
+offset_top = -150.0
+offset_right = 90.0
+offset_bottom = -120.0
+theme_override_colors/font_color = Color(1, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 20
+text = "[G] ??"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Merchant"]
+offset_left = -80.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -90.0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "Merchant"
+horizontal_alignment = 1
+
+[node name="CigarettePickup" parent="." instance=ExtResource("7_pickup")]
+position = Vector2(2800, 300)
+amount = 3
+
+[node name="BossTrigger" parent="." instance=ExtResource("5_trigger")]
+position = Vector2(5500, 301)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FingerHealthUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -520.0
+offset_right = 70.0
+offset_bottom = -480.0
+grow_vertical = 0
+script = ExtResource("10_health")
+player = NodePath("../../Player")
+
+[node name="Palm" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -323.0
+offset_top = 148.0
+offset_right = 957.0
+offset_bottom = 868.0
+texture = ExtResource("11_palm")
+
+[node name="Thumb" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -347.0
+offset_top = 169.0
+offset_right = 933.0
+offset_bottom = 889.0
+texture = ExtResource("16_thumb")
+
+[node name="Index" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -311.0
+offset_top = 168.0
+offset_right = 969.0
+offset_bottom = 888.0
+texture = ExtResource("15_index")
+
+[node name="Middle" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 149.0
+offset_right = 955.0
+offset_bottom = 869.0
+texture = ExtResource("14_middle")
+
+[node name="Ring" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 159.0
+offset_right = 955.0
+offset_bottom = 879.0
+texture = ExtResource("13_ring")
+
+[node name="Pinky" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 0
+offset_left = -313.0
+offset_top = 161.0
+offset_right = 967.0
+offset_bottom = 881.0
+pivot_offset = Vector2(40, 150)
+texture = ExtResource("12_pinky")
+
+[node name="CigaretteUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 220.0
+offset_top = -180.0
+offset_right = 420.0
+offset_bottom = -40.0
+grow_vertical = 0
+script = ExtResource("17_cigui")
+player = NodePath("../../Player")
+
+[node name="Pack" type="TextureRect" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("18_cig")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "x0"
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 95.0
+offset_right = 200.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "R"
+
+[node name="DialogueUI" parent="CanvasLayer" instance=ExtResource("19_dlg")]
+
+[node name="ShopUI" parent="CanvasLayer" instance=ExtResource("20_shop")]
+player = NodePath("../../Player")

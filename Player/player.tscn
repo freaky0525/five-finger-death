@@ -1,12 +1,12 @@
 [gd_scene load_steps=32 format=3 uid="uid://cepo2xhyk4vm8"]
 
 [ext_resource type="Script" uid="uid://dhei31d31cgiw" path="res://Player/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://dxllrkbbbko2o" path="res://asset/576_324 player.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dxllrkbbbko2o" path="res://asset/characters/player/576_324 player.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://c27mr7o8g4l2q" path="res://Player/plaer_camera.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://b0n313avlvpxl" path="res://Player/dash.gd" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://dhyj7j8ia4dor" path="res://Player/sheild.gd" id="5_sweqy"]
 [ext_resource type="Script" uid="uid://c4esi3ypetvo8" path="res://Player/combat_component.gd" id="6_fhl08"]
-[ext_resource type="Texture2D" uid="uid://dygvf00g4sexc" path="res://asset/Rock.png" id="7_n471f"]
+[ext_resource type="Texture2D" uid="uid://dygvf00g4sexc" path="res://asset/environment/Rock.png" id="7_n471f"]
 [ext_resource type="Texture2D" uid="uid://cktqd0knj1qds" path="res://asset/dash/dash1.png" id="8_7emwf"]
 [ext_resource type="Texture2D" uid="uid://dmpqnly8ila3m" path="res://asset/dash/dash2.png" id="9_hshwv"]
 [ext_resource type="Texture2D" uid="uid://cepm4256ns76c" path="res://asset/dash/dash3.png" id="10_gpjlu"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bqcba1te1eyk" path="res://asset/dash/dash11.png" id="18_bbimk"]
 [ext_resource type="Texture2D" uid="uid://b8ji8n27hk5vj" path="res://asset/dash/dash12.png" id="19_m0h3t"]
 [ext_resource type="Texture2D" uid="uid://d2daa5gi21rlu" path="res://asset/dash/dash13.png" id="20_i4o1l"]
-[ext_resource type="Texture2D" uid="uid://clhrtdqxejx8f" path="res://asset/punch.png" id="21_7emwf"]
+[ext_resource type="Texture2D" uid="uid://clhrtdqxejx8f" path="res://asset/vfx/punch.png" id="21_7emwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(193, 41)
@@ -30,7 +30,7 @@ radius = 66.0
 height = 184.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
-size = Vector2(65.915, 15.360638)
+size = Vector2(65.915, 15.3606)
 
 [sub_resource type="Animation" id="Animation_qs4pp"]
 length = 0.001
@@ -67,7 +67,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0416, 0.0833, 0.12, 0.166, 0.2083, 0.25, 0.29, 0.3323, 0.374, 0.4156, 0.4573, 0.499, 0.53333336, 0.56666666, 0.6, 0.6666667, 0.70459616, 0.74689615, 0.78859615, 0.8285961, 0.87089616, 0.91259617, 0.95419616, 0.99589616),
+"times": PackedFloat32Array(0, 0.0416, 0.0833, 0.12, 0.166, 0.2083, 0.25, 0.29, 0.3323, 0.374, 0.4156, 0.4573, 0.499, 0.533333, 0.566667, 0.6, 0.666667, 0.704596, 0.746896, 0.788596, 0.828596, 0.870896, 0.912596, 0.954196, 0.995896),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [ExtResource("8_7emwf"), ExtResource("9_hshwv"), ExtResource("10_gpjlu"), ExtResource("11_8mwp6"), ExtResource("12_qemgg"), ExtResource("13_8viyr"), ExtResource("14_sm0op"), ExtResource("15_76lrf"), ExtResource("16_efx54"), ExtResource("17_755ss"), ExtResource("18_bbimk"), ExtResource("19_m0h3t"), ExtResource("20_i4o1l"), ExtResource("8_7emwf"), ExtResource("9_hshwv"), ExtResource("10_gpjlu"), ExtResource("11_8mwp6"), ExtResource("12_qemgg"), ExtResource("13_8viyr"), ExtResource("14_sm0op"), ExtResource("15_76lrf"), ExtResource("16_efx54"), ExtResource("17_755ss"), ExtResource("18_bbimk"), ExtResource("19_m0h3t")]
@@ -128,8 +128,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, 0, 0, 0.0069333334, 0.01454441, 0.05235988, -0.0069333334, -0.008726646, 0, 0, 0, -0.0069333334, 0.008726646, 0, 0, -0.05235988, -0.006933333, 0.008726646, 0, 0, 0, 0, 0, 0.0069333334, 0.01454441, 0.05235988, -0.0069333334, -0.008726646, 0, 0, 0, -0.0069333334, 0.008726646, 0, 0, -0.05235988, -0.006933333, 0.008726646, 0, 0, 0, 0, 0, 0.0069333334, 0.01454441, 0.05235988, -0.0069333334, -0.008726646, 0, 0, 0, -0.0069333334, 0.008726646, 0, 0, -0.05235988, -0.006933333, 0.008726646, 0, 0, 0, 0, 0, 0.0069333334, 0.01454441, 0.05235988, -0.0069333334, -0.008726646, 0, 0, 0, -0.0069333334, 0.008726646, 0, 0, -0.05235988, -0.006933333, 0.008726646, 0, 0),
-"times": PackedFloat32Array(0, 0.0416, 0.0832, 0.1248, 0.16459413, 0.20619413, 0.24779412, 0.28939414, 0.331, 0.3726, 0.4142, 0.4558, 0.4974, 0.539, 0.58059996, 0.6222)
+"points": PackedFloat32Array(0, 0, 0, 0.00693333, 0.0145444, 0.0523599, -0.00693333, -0.00872665, 0, 0, 0, -0.00693333, 0.00872665, 0, 0, -0.0523599, -0.00693333, 0.00872665, 0, 0, 0, 0, 0, 0.00693333, 0.0145444, 0.0523599, -0.00693333, -0.00872665, 0, 0, 0, -0.00693333, 0.00872665, 0, 0, -0.0523599, -0.00693333, 0.00872665, 0, 0, 0, 0, 0, 0.00693333, 0.0145444, 0.0523599, -0.00693333, -0.00872665, 0, 0, 0, -0.00693333, 0.00872665, 0, 0, -0.0523599, -0.00693333, 0.00872665, 0, 0, 0, 0, 0, 0.00693333, 0.0145444, 0.0523599, -0.00693333, -0.00872665, 0, 0, 0, -0.00693333, 0.00872665, 0, 0, -0.0523599, -0.00693333, 0.00872665, 0, 0),
+"times": PackedFloat32Array(0, 0.0416, 0.0832, 0.1248, 0.164594, 0.206194, 0.247794, 0.289394, 0.331, 0.3726, 0.4142, 0.4558, 0.4974, 0.539, 0.5806, 0.6222)
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -138,7 +138,7 @@ tracks/1/path = NodePath("Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16459413, 0.331, 0.4974),
+"times": PackedFloat32Array(0, 0.164594, 0.331, 0.4974),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [ExtResource("2_onrkg"), ExtResource("2_onrkg"), ExtResource("2_onrkg"), ExtResource("2_onrkg")]

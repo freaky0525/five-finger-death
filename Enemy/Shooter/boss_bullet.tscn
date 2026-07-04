@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b75hj4fj1s702"]
 
-[ext_resource type="Script" uid="uid://b2vo3es1onwce" path="res://bullet.gd" id="1_7qie7"]
-[ext_resource type="Texture2D" uid="uid://drw8vonmlvwfd" path="res://asset/bullet.png" id="2_w6ryw"]
+[ext_resource type="Script" uid="uid://b2vo3es1onwce" path="res://Enemy/Shooter/bullet.gd" id="1_7qie7"]
+[ext_resource type="Texture2D" uid="uid://drw8vonmlvwfd" path="res://asset/items/bullet.png" id="2_w6ryw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7qie7"]
 blend_mode = 2

@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
+signal defeated
+
 @export var health = 2
 @export var speed = 150.0
+@export var is_stationary: bool = false
 @export var orbit_radius = 1000.0 # Stay far away
 @export var orbit_speed = 1.0
 @export var bullet_scene: PackedScene # Drag bullet.tscn here in Inspector
@@ -13,6 +16,7 @@ var is_hit = false
 var orbit_angle = 0.0
 
 func _ready():
+	add_to_group("level_entity")
 	orbit_angle = randf() * TAU
 
 func _physics_process(delta):
@@ -20,8 +24,15 @@ func _physics_process(delta):
 		return
 	
 	if is_hit:
+		if is_stationary:
+			return
 		velocity = velocity.move_toward(Vector2.ZERO, speed * delta)
-		if is_inside_tree(): move_and_slide()
+		if is_inside_tree():
+			move_and_slide()
+		return
+
+	if is_stationary:
+		_update_facing()
 		return
 
 	# 1. Update the angle for rotation
@@ -64,7 +75,19 @@ func _physics_process(delta):
 	
 	if is_inside_tree() and not is_queued_for_deletion():
 		move_and_slide()
-	
+
+
+func _update_facing() -> void:
+	if not player:
+		return
+
+	if player.global_position.x < global_position.x:
+		$Sprite2D.flip_h = true
+		$Muzzle.position.x = -abs($Muzzle.position.x)
+	else:
+		$Sprite2D.flip_h = false
+		$Muzzle.position.x = abs($Muzzle.position.x)
+
 
 # 2. SHOOTING LOGIC
 # Connect the ShootTimer's "timeout" signal to this function
@@ -73,7 +96,7 @@ func _on_shoot_timer_timeout():
 	
 	print("Shooter: FIRING!")
 	var b = bullet_scene.instantiate()
-	get_tree().root.add_child(b) # Add bullet to the main world
+	get_tree().current_scene.add_child(b)
 	
 	b.global_position = muzzle.global_position
 	# Aim the bullet toward the player
@@ -88,6 +111,14 @@ func take_damage(attacker):
 		die()
 		return
 	is_hit = true
+	if is_stationary:
+		modulate = Color.RED
+		await get_tree().create_timer(0.4).timeout
+		if health > 0:
+			is_hit = false
+			modulate = Color.WHITE
+		return
+
 	var knock_dir = 1 if global_position.x > attacker.global_position.x else -1
 	velocity = Vector2(knock_dir * 800, -200)
 	modulate = Color.RED
@@ -97,6 +128,7 @@ func take_damage(attacker):
 		modulate = Color.WHITE
 
 func die():
+	defeated.emit()
 	set_physics_process(false)
 	$ShootTimer.stop()
 	modulate = Color(10, 10, 10, 1)

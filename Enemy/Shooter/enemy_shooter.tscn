@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpboq1sips5vm"]
+[gd_scene load_steps=8 format=3 uid="uid://cpboq1sips5vm"]
 
 [ext_resource type="Script" uid="uid://csrsnfubq2eso" path="res://Enemy/Shooter/enemy_shooter.gd" id="1_plvs3"]
 [ext_resource type="PackedScene" uid="uid://drwsief3ugkbp" path="res://Enemy/Shooter/bullet.tscn" id="2_kb7he"]
-[ext_resource type="Texture2D" uid="uid://dme1he36n5j2p" path="res://asset/Dog enemy.png" id="2_plvs3"]
+[ext_resource type="Texture2D" uid="uid://dme1he36n5j2p" path="res://asset/enemies/Dog enemy.png" id="2_plvs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iifgy"]
 size = Vector2(226, 62)
@@ -12,7 +12,11 @@ radius = 92.0
 height = 288.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_whglc"]
-size = Vector2(312.10938, 85.6875)
+size = Vector2(312.109, 85.6875)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kb7he"]
+radius = 64.0
+height = 142.0
 
 [node name="EnemyShooter" type="CharacterBody2D"]
 collision_layer = 4
@@ -33,17 +37,27 @@ collision_layer = 32
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
-rotation = 1.5707964
+rotation = 1.5708
+scale = Vector2(0.865, 1)
+shape = SubResource("CapsuleShape2D_4gyqm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TouchArea"]
+rotation = 1.5708
 scale = Vector2(0.865, 1)
 shape = SubResource("CapsuleShape2D_4gyqm")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-1, 6)
 collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 106)
 shape = SubResource("RectangleShape2D_whglc")
+
+[node name="CollisionShape2D_Head" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-87, -97)
+shape = SubResource("CapsuleShape2D_kb7he")
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 2.0

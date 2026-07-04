@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
+signal defeated
+
 @export var health = 3
 @export var speed = 300.0
+@export var is_stationary: bool = false
 @export var orbit_radius = 250.0 
 @export var orbit_speed = 10
 @export var target_height_offset = 115.0 # Moves the center up to the player's chest
@@ -13,7 +16,7 @@ var is_hit = false
 var orbit_angle = 0.0 
 
 func _ready():
-	# Start at a random spot so multiple enemies don't stack
+	add_to_group("level_entity")
 	orbit_angle = randf() * TAU
 
 func _physics_process(delta):
@@ -21,9 +24,16 @@ func _physics_process(delta):
 		return
 	
 	if is_hit:
+		if is_stationary:
+			return
 		velocity = velocity.move_toward(Vector2.ZERO, speed * delta)
-		if is_inside_tree(): 
+		if is_inside_tree():
 			move_and_slide()
+		return
+
+	if is_stationary:
+		sprite.flip_h = player.global_position.x < global_position.x
+		check_for_player_contact()
 		return
 
 	# 1. CALCULATE THE CENTER (With Offset)
@@ -65,6 +75,14 @@ func take_damage(attacker):
 		return
 
 	is_hit = true
+	if is_stationary:
+		modulate = Color.RED
+		await get_tree().create_timer(0.4).timeout
+		if health > 0:
+			is_hit = false
+			modulate = Color.WHITE
+		return
+
 	var knock_dir = sign(global_position.x - attacker.global_position.x)
 	if knock_dir == 0: knock_dir = 1
 	
@@ -88,6 +106,8 @@ func check_for_player_contact():
 			area.get_parent().take_damage(self)
 			
 func die():
+	defeated.emit()
+
 	# Stop everything immediately
 	set_physics_process(false)
 	set_process(false)

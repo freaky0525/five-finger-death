@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccigpick001"]
+
+[ext_resource type="Script" uid="uid://dcigpick001" path="res://world/cigarette_pickup.gd" id="1_cp"]
+[ext_resource type="Texture2D" uid="uid://276kdot5qsn6" path="res://asset/items/cigar.png" id="2_cig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cp"]
+radius = 48.0
+
+[node name="CigarettePickup" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_cp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_cig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

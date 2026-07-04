@@ -3,6 +3,7 @@ extends Camera2D
 @export var camera_smooth_speed = 0.3
 @export var shake_intensity = 3.0
 @export var shake_speed = 30.0
+@export var lock_horizontal := false
 
 var last_target_x = -275.0
 var noise_time = 1.0
@@ -12,8 +13,9 @@ func _process(delta):
 	var screen_size = get_viewport_rect().size
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	# Update target based on player movement
-	if direction.x > 0:
+	if lock_horizontal:
+		last_target_x = -275.0
+	elif direction.x > 0:
 		last_target_x = -275.0
 	elif direction.x < 0:
 		last_target_x = -screen_size.x * 0.6

@@ -4,6 +4,10 @@ extends CharacterBody2D
 @export var max_health = 10
 @export var dash_speed = 1000.0
 @export var bullet_scene: PackedScene # Drag bullet.tscn here
+@export var contact_damage: int = 2
+@export var contact_damage_cooldown: float = 1.0
+
+var can_contact_damage: bool = true
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var muzzle = $Muzzle
@@ -24,18 +28,28 @@ func _ready():
 	start_resting(2.0)
 	
 # Call this inside _physics_process(delta)
+func start_contact_damage_cooldown():
+	can_contact_damage = false
+	await get_tree().create_timer(contact_damage_cooldown).timeout
+	can_contact_damage = true
 func check_for_player_contact():
-	# Use the specific TouchArea node
+	if not can_contact_damage:
+		return
+
 	var areas = $TouchArea.get_overlapping_areas()
 	
 	for area in areas:
-		# Check if we hit the Player's Hurtbox
 		if area.get_parent().has_method("take_damage") and area.get_parent().name == "Player":
-			area.get_parent().take_damage(self)
+			if area.get_parent().is_dead:
+				return
+			area.get_parent().take_damage(self, contact_damage)
+			start_contact_damage_cooldown()
+			return
 			
-		# Check if we hit the Player directly (if player detects damage on body)
 		elif area.has_method("take_damage"):
-			area.take_damage(self)
+			area.take_damage(self, contact_damage)
+			start_contact_damage_cooldown()
+			return
 
 func _physics_process(delta):
 	check_for_player_contact()
@@ -98,7 +112,7 @@ func start_shooting_sequence():
 func fire_bullet():
 	if not bullet_scene: return
 	var b = bullet_scene.instantiate()
-	get_tree().root.add_child(b)
+	get_tree().current_scene.add_child(b)
 	b.global_position = muzzle.global_position
 	b.direction = muzzle.global_position.direction_to(player.global_position)
 	b.rotation = b.direction.angle()
