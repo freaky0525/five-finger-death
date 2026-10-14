@@ -9,18 +9,18 @@ signal closed
 @onready var close_button: Button = $Panel/Margin/VBox/CloseButton
 
 const SHOP_ITEMS := [
-	{"id": "cig_1", "label": "\u9999\u83f8 x1", "desc": "\u56de 1 HP\uff08\u6309 R \u4f7f\u7528\uff09", "price": 15},
-	{"id": "cig_3", "label": "\u9999\u83f8 x3", "desc": "\u4e00\u5305\u4e09\u6839", "price": 40},
-	{"id": "shield", "label": "\u76fe\u5145\u80fd +3", "desc": "\u589e\u52a0\u683c\u64cb\u6b21\u6578", "price": 30},
+	{"id": "cig_1", "label": "Cigarette x1", "desc": "Restore 1 HP (press R to use)", "price": 15},
+	{"id": "cig_3", "label": "Cigarette x3", "desc": "Pack of three", "price": 40},
+	{"id": "shield", "label": "Shield Refill +3", "desc": "Adds block charges", "price": 30},
 ]
 
 
 func _ready() -> void:
 	visible = false
 	close_button.pressed.connect(_close)
-	$Panel/Margin/VBox/Title.text = "\u88dc\u7d66\u5546\u5e97"
-	coins_label.text = "\u91d1\u5e63\uff1a0"
-	close_button.text = "\u95dc\u9589\u5546\u5e97"
+	$Panel/Margin/VBox/Title.text = "Supply Shop"
+	coins_label.text = "Coins: 0"
+	close_button.text = "Close Shop"
 	UIFonts.apply($Panel/Margin/VBox/Title)
 	UIFonts.apply(coins_label)
 	UIFonts.apply(close_button)
@@ -32,7 +32,7 @@ func open() -> void:
 
 
 func _refresh() -> void:
-	coins_label.text = "\u91d1\u5e63\uff1a%d" % GameState.coins
+	coins_label.text = "Coins: %d" % GameState.coins
 	for child in items_box.get_children():
 		child.queue_free()
 
@@ -51,7 +51,7 @@ func _make_item_row(item: Dictionary) -> HBoxContainer:
 	row.add_child(info)
 
 	var buy_button := Button.new()
-	buy_button.text = "\u8cfc\u8cb7 %d" % item.price
+	buy_button.text = "Buy %d" % item.price
 	buy_button.custom_minimum_size = Vector2(140, 48)
 	UIFonts.apply(buy_button)
 	buy_button.pressed.connect(_buy.bind(item))
@@ -96,7 +96,7 @@ func _buy(item: Dictionary) -> void:
 			if shield:
 				shield.shield_charges += 3
 
-	coins_label.text = "\u91d1\u5e63\uff1a%d" % GameState.coins
+	coins_label.text = "Coins: %d" % GameState.coins
 
 
 func _close() -> void:

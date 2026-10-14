@@ -8,6 +8,9 @@ extends Node
 var is_attacking = false
 
 func _process(_delta):
+	if player.menu_locked:
+		return
+
 	if Input.is_action_just_pressed("punch") and not is_attacking:
 		punch()
 

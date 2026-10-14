@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://ndffk53x6qc7"]
+
+[ext_resource type="Script" uid="uid://b1uv7kcql0aev" path="res://Enemy/Rocket/enemy_rocket.gd" id="1_rocket"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(420, 72)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_touch"]
+radius = 63.0
+height = 330.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(450, 135)
+
+[node name="EnemyRocket" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_rocket")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.33, 0.33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="TouchArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 9
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
+position = Vector2(60, -30)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_touch")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(30, -27)
+shape = SubResource("RectangleShape2D_hurt")

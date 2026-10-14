@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d2melecxcqrfu"]
+[gd_scene load_steps=24 format=3 uid="uid://d2melecxcqrfu"]
 
 [ext_resource type="PackedScene" uid="uid://cepo2xhyk4vm8" path="res://Player/player.tscn" id="1_3hls8"]
 [ext_resource type="Texture2D" uid="uid://cr6hsci5elsc0" path="res://asset/environment/floor_dist.png" id="2_hbghi"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://cteleport001" path="res://world/teleporter.tscn" id="16_tp"]
 [ext_resource type="Script" uid="uid://dcigui001" path="res://ui/cigarette_ui.gd" id="17_cigui"]
 [ext_resource type="Texture2D" uid="uid://276kdot5qsn6" path="res://asset/items/cigar.png" id="18_cig"]
+[ext_resource type="PackedScene" uid="uid://bdhax2xe6hgts" path="res://world/background_3d/parallax_background_3d.tscn" id="19_pbg3d"]
+[ext_resource type="PackedScene" uid="uid://b3pysvwfsciuq" path="res://world/backgrounds/level_1_bg.tscn" id="20_bg3d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hbghi"]
 
@@ -27,7 +29,11 @@
 y_sort_enabled = true
 script = ExtResource("8_lvl1")
 
+[node name="ParallaxBackground3D" parent="." instance=ExtResource("19_pbg3d")]
+background_scene = ExtResource("20_bg3d")
+
 [node name="Wall" type="TextureRect" parent="."]
+visible = false
 z_index = -1
 offset_top = -1056.0
 offset_right = 17982.0
@@ -69,6 +75,7 @@ stream = ExtResource("5_rka8t")
 autoplay = true
 
 [node name="Wall2" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -82,6 +89,7 @@ texture = ExtResource("3_hn12h")
 stretch_mode = 1
 
 [node name="floor" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -168,7 +176,6 @@ offset_right = 70.0
 offset_bottom = -480.0
 grow_vertical = 0
 script = ExtResource("10_65or1")
-player = NodePath("../../Player")
 
 [node name="Palm" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
 layout_mode = 2
@@ -230,7 +237,6 @@ offset_right = 420.0
 offset_bottom = -40.0
 grow_vertical = 0
 script = ExtResource("17_cigui")
-player = NodePath("../../Player")
 
 [node name="Pack" type="TextureRect" parent="CanvasLayer/CigaretteUI"]
 layout_mode = 0
@@ -251,19 +257,9 @@ text = "x0"
 
 [node name="HintLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
 layout_mode = 0
-offset_left = 0.0
 offset_top = 95.0
 offset_right = 200.0
 offset_bottom = 130.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
 theme_override_font_sizes/font_size = 18
 text = "R"
-
-[connection signal="player_entered_zone" from="Wave1" to="Wave1Melee1" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave1" to="Wave1Melee3" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave1_2" to="Wave1Melee2" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave1_2" to="Wave1Melee4" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave2" to="Wave2Melee1" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave2" to="Wave2Melee2" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave2" to="Wave2Shooter1" method="start_spawning"]
-[connection signal="player_entered_zone" from="Wave2" to="Wave2Shooter2" method="start_spawning"]

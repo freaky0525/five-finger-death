@@ -10,6 +10,7 @@ signal attack_blocked
 @export var knockback_force: float = 650.0
 @export var invincibility_duration: float = 0.5
 @export var minimum_health: int = 0
+@export var walk_lane_y := 300.0
 
 var current_health: int = 5
 var cigarettes: int = 0
@@ -17,6 +18,8 @@ var is_dead = false
 var is_invincible := false
 var is_hurt := false
 var menu_locked := false
+var dialogue_performance_active := false
+var _dialogue_home_position := Vector2.ZERO
 
 @onready var anim = $AnimationPlayer
 @onready var sprite = $Sprite2D
@@ -59,6 +62,40 @@ func _physics_process(_delta):
 		velocity = velocity * 0.2
 
 	move_and_slide()
+
+
+func start_dialogue_performance(target_pos: Vector2, target_scale: float, duration: float, face_right: bool = true) -> void:
+	menu_locked = true
+	_dialogue_home_position = global_position
+	sprite.flip_h = not face_right
+	anim.play("walk")
+	var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", target_pos, duration)
+	tween.tween_property(sprite, "scale", Vector2.ONE * target_scale, duration)
+
+
+func finish_dialogue_performance(face_right: bool = true) -> void:
+	dialogue_performance_active = true
+	sprite.flip_h = not face_right
+	anim.play("idle")
+
+
+func start_exit_dialogue_performance(duration: float) -> void:
+	if not dialogue_performance_active:
+		return
+
+	anim.play("walk")
+	var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", _dialogue_home_position, duration)
+	tween.tween_property(sprite, "scale", Vector2.ONE, duration)
+
+
+func finish_exit_dialogue_performance() -> void:
+	dialogue_performance_active = false
+	menu_locked = false
+	global_position = _dialogue_home_position
+	sprite.scale = Vector2.ONE
+	anim.play("idle")
 
 
 func _process(_delta):
@@ -122,18 +159,23 @@ func take_damage(attacker, damage_amount: int = 1):
 
 
 func _apply_hit_reaction(attacker: Node2D) -> void:
-	is_hurt = true
 	is_invincible = true
+	var passthrough: bool = false
+	if attacker != null and is_instance_valid(attacker):
+		passthrough = attacker.get("passthrough_on_hit") == true
 
-	var knock_dir: Vector2 = global_position - attacker.global_position
-	if knock_dir.length_squared() < 1.0:
-		knock_dir = Vector2.RIGHT if not sprite.flip_h else Vector2.LEFT
-	else:
-		knock_dir = knock_dir.normalized()
+	if not passthrough:
+		is_hurt = true
+		var knock_dir: Vector2 = Vector2.RIGHT
+		if attacker != null and is_instance_valid(attacker):
+			knock_dir = global_position - attacker.global_position
+		if knock_dir.length_squared() < 1.0:
+			knock_dir = Vector2.RIGHT if not sprite.flip_h else Vector2.LEFT
+		else:
+			knock_dir = knock_dir.normalized()
+		velocity = knock_dir * knockback_force
 
-	velocity = knock_dir * knockback_force
 	_flash_hurt()
-
 	await get_tree().create_timer(invincibility_duration).timeout
 
 	if not is_instance_valid(self) or is_dead:
@@ -174,11 +216,12 @@ func die() -> void:
 		return
 
 	is_dead = true
-	GameState.save_from_player(self)
+	GameState.player_health = max_health
+	GameState.player_max_health = max_health
+	GameState.cigarettes = cigarettes
 	_reset_wave_borders()
 	set_physics_process(false)
 	set_process(false)
-	print("Player is restarting scene...")
 	get_tree().call_deferred("reload_current_scene")
 
 

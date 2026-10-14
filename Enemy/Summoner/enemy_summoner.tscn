@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cenemysummoner1"]
+
+[ext_resource type="Script" path="res://Enemy/Summoner/enemy_summoner.gd" id="1_summon"]
+[ext_resource type="Texture2D" path="res://asset/enemies/summoner/summoner.png" id="2_tex"]
+[ext_resource type="PackedScene" uid="uid://cenemychatter1" path="res://Enemy/Chatter/enemy_chatter.tscn" id="3_minion"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(260, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(280, 90)
+
+[node name="EnemySummoner" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_summon")
+minion_scene = ExtResource("3_minion")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="SummonTimer" type="Timer" parent="."]
+wait_time = 3.0

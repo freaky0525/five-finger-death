@@ -85,7 +85,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -810.0
-offset_top = -480.0
+offset_top = -560.0
 offset_right = -550.0
 offset_bottom = -322.0
 grow_horizontal = 2
@@ -108,6 +108,24 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
 text = "NEW GAME"
+
+[node name="ChooseLevel" type="Button" parent="Menu"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "CHOOSE LEVEL"
 
 [node name="Options" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(420, 70)
@@ -146,6 +164,136 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
 text = "QUIT
 "
 
+[node name="LevelPicker" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -810.0
+offset_top = -760.0
+offset_right = -550.0
+offset_bottom = -322.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TutorialButton" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "TUTORIAL"
+
+[node name="Level1Button" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "LEVEL 1"
+
+[node name="Level2Button" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "LEVEL 2"
+
+[node name="JapanButton" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "JAPAN"
+
+[node name="BossArenaButton" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "BOSS ARENA"
+
+[node name="BackButton" type="Button" parent="LevelPicker"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qoqlk")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+text = "BACK"
+
 [connection signal="pressed" from="Menu/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="Menu/Options" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="Menu/Quit" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Menu/ChooseLevel" to="." method="_on_choose_level_pressed"]
+[connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="LevelPicker/TutorialButton" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="LevelPicker/Level1Button" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="LevelPicker/Level2Button" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="LevelPicker/JapanButton" to="." method="_on_japan_pressed"]
+[connection signal="pressed" from="LevelPicker/BossArenaButton" to="." method="_on_boss_arena_pressed"]
+[connection signal="pressed" from="LevelPicker/BackButton" to="." method="_on_level_back_pressed"]

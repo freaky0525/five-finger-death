@@ -8,18 +8,28 @@ extends Control
 
 
 func _ready() -> void:
-	if player == null:
-		return
-
-	hint_label.text = "R \u62bd\u83f8\u56de\u8840"
+	hint_label.text = "R to heal"
 	UIFonts.apply(hint_label)
 	UIFonts.apply(count_label)
-	player.cigarettes_changed.connect(update_ui)
+	call_deferred("_setup_player")
+
+
+func _setup_player() -> void:
+	if player == null:
+		player = get_tree().get_first_node_in_group("player")
+
+	if player == null:
+		push_warning("CigaretteUI: Player is not assigned.")
+		return
+
+	if not player.cigarettes_changed.is_connected(update_ui):
+		player.cigarettes_changed.connect(update_ui)
+
 	update_ui(player.cigarettes)
 
 
 func update_ui(count: int) -> void:
 	count_label.text = "x%d" % count
+	count_label.visible = true
 	pack.visible = count > 0
-	count_label.visible = count > 0
 	hint_label.visible = count > 0

@@ -13,6 +13,7 @@ var fingers: Array[TextureRect]
 
 
 func _ready():
+	add_to_group("finger_health_ui")
 	fingers = [
 		pinky,
 		ring,

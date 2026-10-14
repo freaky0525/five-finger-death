@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Enemy/Ninja/ninja.gd" id="1_ninja"]
+[ext_resource type="Texture2D" path="res://asset/enemies/ninja/idle.png" id="2_idle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(180, 70)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 230.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(200, 280)
+
+[node name="Ninja" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_ninja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_idle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 120)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="InteractPrompt" type="Label" parent="."]
+offset_left = -90.0
+offset_top = -230.0
+offset_right = 90.0
+offset_bottom = -196.0
+theme_override_colors/font_color = Color(1, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 20
+text = "[G] Talk"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -196.0
+offset_right = 80.0
+offset_bottom = -166.0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "???"
+horizontal_alignment = 1
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_hurt")

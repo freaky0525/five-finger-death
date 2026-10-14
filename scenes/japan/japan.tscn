@@ -1,0 +1,168 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cepo2xhyk4vm8" path="res://Player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://cr6hsci5elsc0" path="res://asset/environment/floor_dist.png" id="2_floor"]
+[ext_resource type="AudioStream" uid="uid://cpynyctj5mk0d" path="res://asset/audio/Five Finger Death bg music.mp3" id="3_music"]
+[ext_resource type="Script" path="res://scenes/japan/japan.gd" id="4_script"]
+[ext_resource type="Script" uid="uid://bty616xcalvhj" path="res://ui/finger_health_ui.gd" id="5_health"]
+[ext_resource type="Texture2D" uid="uid://bfw8h0sxt4k6n" path="res://asset/ui/health/palm.png" id="6_palm"]
+[ext_resource type="Texture2D" uid="uid://cf83o4lahys8h" path="res://asset/ui/health/pinky.png" id="7_pinky"]
+[ext_resource type="Texture2D" uid="uid://cfwehk1r6uyvn" path="res://asset/ui/health/ring.png" id="8_ring"]
+[ext_resource type="Texture2D" uid="uid://dbvnv4ipuabe6" path="res://asset/ui/health/middle.png" id="9_middle"]
+[ext_resource type="Texture2D" uid="uid://cm36eb1mqmwdm" path="res://asset/ui/health/index.png" id="10_index"]
+[ext_resource type="Texture2D" uid="uid://idywofr1m4qt" path="res://asset/ui/health/thumb.png" id="11_thumb"]
+[ext_resource type="Script" uid="uid://dcigui001" path="res://ui/cigarette_ui.gd" id="12_cigui"]
+[ext_resource type="Texture2D" uid="uid://276kdot5qsn6" path="res://asset/items/cigar.png" id="13_cig"]
+[ext_resource type="PackedScene" uid="uid://bdhax2xe6hgts" path="res://world/background_3d/parallax_background_3d.tscn" id="14_pbg"]
+[ext_resource type="PackedScene" uid="uid://b3pysvwfsciuq" path="res://world/backgrounds/level_1_bg.tscn" id="15_bg"]
+[ext_resource type="PackedScene" path="res://Enemy/Ninja/ninja.tscn" id="16_ninja"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_ui.tscn" id="17_dlg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_floor"]
+
+[node name="Japan" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("4_script")
+
+[node name="ParallaxBackground3D" parent="." instance=ExtResource("14_pbg")]
+background_scene = ExtResource("15_bg")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="floor" type="TextureRect" parent="Floor"]
+offset_right = 6000.0
+offset_bottom = 1227.0
+texture = ExtResource("2_floor")
+stretch_mode = 1
+
+[node name="top_border" type="CollisionShape2D" parent="Floor"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="left_border" type="CollisionShape2D" parent="Floor"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="down_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 597)
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="right_border" type="CollisionShape2D" parent="Floor"]
+position = Vector2(6000, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(400, 43)
+
+[node name="Ninja" parent="." instance=ExtResource("16_ninja")]
+position = Vector2(1700, 43)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_music")
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueUI" parent="CanvasLayer" instance=ExtResource("17_dlg")]
+
+[node name="FingerHealthUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -520.0
+offset_right = 70.0
+offset_bottom = -480.0
+grow_vertical = 0
+script = ExtResource("5_health")
+player = NodePath("../../Player")
+
+[node name="Palm" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -323.0
+offset_top = 148.0
+offset_right = 957.0
+offset_bottom = 868.0
+texture = ExtResource("6_palm")
+
+[node name="Thumb" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -347.0
+offset_top = 169.0
+offset_right = 933.0
+offset_bottom = 889.0
+texture = ExtResource("11_thumb")
+
+[node name="Index" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -311.0
+offset_top = 168.0
+offset_right = 969.0
+offset_bottom = 888.0
+texture = ExtResource("10_index")
+
+[node name="Middle" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 149.0
+offset_right = 955.0
+offset_bottom = 869.0
+texture = ExtResource("9_middle")
+
+[node name="Ring" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 2
+offset_left = -325.0
+offset_top = 159.0
+offset_right = 955.0
+offset_bottom = 879.0
+texture = ExtResource("8_ring")
+
+[node name="Pinky" type="TextureRect" parent="CanvasLayer/FingerHealthUI"]
+layout_mode = 0
+offset_left = -313.0
+offset_top = 161.0
+offset_right = 967.0
+offset_bottom = 881.0
+pivot_offset = Vector2(40, 150)
+texture = ExtResource("7_pinky")
+
+[node name="CigaretteUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 220.0
+offset_top = -180.0
+offset_right = 420.0
+offset_bottom = -40.0
+grow_vertical = 0
+script = ExtResource("12_cigui")
+
+[node name="Pack" type="TextureRect" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("13_cig")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "x0"
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/CigaretteUI"]
+layout_mode = 0
+offset_top = 95.0
+offset_right = 200.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "R"

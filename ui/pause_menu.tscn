@@ -1,0 +1,160 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpausemenuscn1"]
+
+[ext_resource type="Script" uid="uid://cpausemenugd01" path="res://ui/pause_menu.gd" id="1_pause"]
+[ext_resource type="Texture2D" path="res://asset/ui/pause/frame_02.jpg" id="3_frame"]
+[ext_resource type="Shader" path="res://ui/pause_chroma.gdshader" id="4_chroma"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chroma"]
+shader = ExtResource("4_chroma")
+shader_parameter/cutoff = 0.14
+shader_parameter/softness = 0.05
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 28.0
+content_margin_top = 22.0
+content_margin_right = 28.0
+content_margin_bottom = 22.0
+bg_color = Color(0.05, 0.05, 0.05, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.95, 0.88, 1)
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1_pause")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.32)
+
+[node name="Frames" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_chroma")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+mouse_filter = 2
+texture = ExtResource("3_frame")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Flash" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Interact" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubPage" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="SubPage"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -230.0
+offset_right = -80.0
+offset_bottom = 230.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="SubPage/Card"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="SubPage/Card/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.18, 1)
+theme_override_font_sizes/font_size = 34
+text = "01  音量"
+
+[node name="VolumeBox" type="VBoxContainer" parent="SubPage/Card/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Hint" type="Label" parent="SubPage/Card/VBox/VolumeBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Master Volume"
+
+[node name="Slider" type="HSlider" parent="SubPage/Card/VBox/VolumeBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+max_value = 100.0
+value = 0.0
+
+[node name="Value" type="Label" parent="SubPage/Card/VBox/VolumeBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "0%"
+
+[node name="DisplayBox" type="VBoxContainer" parent="SubPage/Card/VBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Hint" type="Label" parent="SubPage/Card/VBox/DisplayBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Toggle window mode"
+
+[node name="FullscreenButton" type="Button" parent="SubPage/Card/VBox/DisplayBox"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Fullscreen  OFF"
+
+[node name="ControlsBox" type="VBoxContainer" parent="SubPage/Card/VBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Hint" type="Label" parent="SubPage/Card/VBox/ControlsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "WASD  Move
+Shift  Dash
+Ctrl  Block
+Left Click  Punch
+R  Cigarette
+G  Interact
+Esc  Pause / Resume
+1-5  Finger shortcuts"
+
+[node name="Back" type="Button" parent="SubPage/Card/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Back"

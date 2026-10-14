@@ -10,7 +10,7 @@ var is_active := false
 
 func _ready() -> void:
 	_set_active_visual(false)
-	prompt.text = "\u9032\u5165 Boss \u5340\u57df"
+	prompt.text = "Enter Boss Area"
 	UIFonts.apply(prompt)
 
 

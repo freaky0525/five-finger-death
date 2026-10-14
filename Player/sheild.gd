@@ -7,6 +7,12 @@ var is_defending = false
 @onready var player = get_parent()
 
 func _process(_delta):
+	if player.menu_locked:
+		if is_defending:
+			is_defending = false
+			anim.play("idle")
+		return
+
 	# Start defending: Only if we have charges and just pressed the key
 	if Input.is_action_just_pressed("defend") and shield_charges > 0:
 		shield_charges -= 1

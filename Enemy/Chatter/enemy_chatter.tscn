@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cenemychatter1"]
+
+[ext_resource type="Script" path="res://Enemy/Chatter/enemy_chatter.gd" id="1_chatter"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(280, 72)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_touch"]
+radius = 32.0
+height = 160.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(450, 135)
+
+[node name="EnemyChatter" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_chatter")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.22, 0.22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="TouchArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
+position = Vector2(30, -16)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_touch")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(30, -27)
+shape = SubResource("RectangleShape2D_hurt")

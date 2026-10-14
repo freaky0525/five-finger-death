@@ -16,8 +16,12 @@ func _ready():
 	# Set the timer's speed based on your setting
 	timer.wait_time = spawn_interval
 
-func start_spawning():
+func start_spawning() -> void:
+	if timer.time_left > 0.0 and not has_reported_complete:
+		return
+
 	print("Spawner Activated! Incoming Wave: ", spawn_limit)
+	enemies_spawned_so_far = 0
 	has_reported_complete = false
 	timer.start()
 
@@ -37,16 +41,25 @@ func _on_timer_timeout():
 	# 2. Spawn the enemy
 	if enemy_scene:
 		var enemy = enemy_scene.instantiate()
+		var spawn_pos: Vector2 = $Marker2D.global_position
+		spawn_pos.x += randf_range(-20, 20)
+		spawn_pos.y += randf_range(-20, 20)
+		# Position first so _ready() does not run at (0, 0).
+		if enemy is Node2D:
+			(enemy as Node2D).position = spawn_pos
 		get_tree().current_scene.add_child(enemy)
-		enemy.global_position = $Marker2D.global_position
-
-		# Optional: Add small random offset so they don't stack perfectly
-		enemy.global_position.x += randf_range(-20, 20)
-		enemy.global_position.y += randf_range(-20, 20)
+		if enemy is Node2D:
+			(enemy as Node2D).global_position = spawn_pos
 		enemy_spawned.emit(enemy)
 	
 	# 3. Increase the counter
 	enemies_spawned_so_far += 1
+
+	if enemies_spawned_so_far >= spawn_limit:
+		stop_spawning()
+		if not has_reported_complete:
+			has_reported_complete = true
+			spawning_complete.emit()
 
 
 func _on_area_2d_player_entered_zone() -> void:

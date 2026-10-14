@@ -3,11 +3,11 @@ extends Node2D
 enum Step { MOVE, PUNCH, DASH, DEFEND, DONE }
 
 const MESSAGES := {
-	Step.MOVE: "\u4f7f\u7528 WASD \u79fb\u52d5\u89d2\u8272",
-	Step.PUNCH: "\u6309\u6ed1\u9f20\u5de6\u9375\u653b\u6483\u53f3\u5074\u6575\u4eba",
-	Step.DASH: "\u6575\u4eba\u6703\u5c04\u64ca\uff01\u6309 Shift \u885d\u523a\u9583\u907f\u5b50\u5f48",
-	Step.DEFEND: "\u56db\u5468\u6575\u4eba\u6703\u5c04\u64ca\uff01\u6309\u4f4f Ctrl \u683c\u64cb\u5b50\u5f48",
-	Step.DONE: "\u6559\u5b78\u5b8c\u6210\uff01\u5373\u5c07\u9032\u5165\u7b2c\u4e00\u95dc...",
+	Step.MOVE: "Use WASD to move",
+	Step.PUNCH: "Left-click to attack the enemy on your right",
+	Step.DASH: "Enemies shoot! Press Shift to dash and dodge bullets",
+	Step.DEFEND: "Enemies shoot from all sides! Hold Ctrl to block bullets",
+	Step.DONE: "Tutorial complete! Entering Level 1...",
 }
 
 const DASH_LANE_Y := 300.0

@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlgbubble001"]
+
+[ext_resource type="Script" path="res://ui/dialogue_bubble.gd" id="1_bub"]
+[ext_resource type="Texture2D" uid="uid://cxihxqgg0y4v1" path="res://asset/ui/dialogue_box.png" id="2_tex"]
+
+[node name="DialogueBubble" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(1040, 440)
+layout_mode = 0
+offset_right = 1040.0
+offset_bottom = 440.0
+script = ExtResource("1_bub")
+
+[node name="BubbleTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_tex")
+expand_mode = 1
+stretch_mode = 5
+flip_v = true
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 72
+theme_override_constants/margin_bottom = 48
+
+[node name="VBox" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TextLabel" type="Label" parent="Content/VBox"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 28
+text = "..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="ShopButton" type="Button" parent="Content/VBox"]
+visible = false
+custom_minimum_size = Vector2(280, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 26
+flat = true
+text = "Open Shop"
+
+[node name="LeaveButton" type="Button" parent="Content/VBox"]
+visible = false
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 24
+flat = true
+text = "Leave"

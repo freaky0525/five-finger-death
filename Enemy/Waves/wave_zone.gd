@@ -48,19 +48,38 @@ func _on_wave_triggered() -> void:
 	active_enemies = 0
 	_set_borders_enabled(true)
 
+	for spawner_path in spawner_paths:
+		var spawner := get_parent().get_node(spawner_path)
+		if spawner.has_method("start_spawning"):
+			spawner.start_spawning()
+
 
 func _on_enemy_spawned(enemy: Node) -> void:
 	if not is_active:
 		return
 
+	if enemy.get_meta("wave_tracked", false):
+		return
+
+	enemy.set_meta("wave_tracked", true)
 	active_enemies += 1
+
+	var on_removed := func() -> void:
+		_unregister_enemy(enemy)
+
 	if enemy.has_signal("defeated"):
-		enemy.defeated.connect(_on_enemy_defeated, CONNECT_ONE_SHOT)
-	else:
-		enemy.tree_exiting.connect(_on_enemy_defeated, CONNECT_ONE_SHOT)
+		enemy.defeated.connect(on_removed, CONNECT_ONE_SHOT)
+	enemy.tree_exiting.connect(on_removed, CONNECT_ONE_SHOT)
 
 
-func _on_enemy_defeated() -> void:
+func _unregister_enemy(enemy: Node) -> void:
+	if not is_active:
+		return
+
+	if enemy.get_meta("wave_counted_out", false):
+		return
+
+	enemy.set_meta("wave_counted_out", true)
 	active_enemies = max(active_enemies - 1, 0)
 	_check_wave_cleared()
 

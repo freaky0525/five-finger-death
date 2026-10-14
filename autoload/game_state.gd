@@ -13,13 +13,13 @@ func reset() -> void:
 	coins = 0
 
 
-func save_from_player(player: CharacterBody2D) -> void:
+func save_from_player(player: Node) -> void:
 	player_health = player.current_health
 	player_max_health = player.max_health
 	cigarettes = player.cigarettes
 
 
-func apply_to_player(player: CharacterBody2D) -> void:
+func apply_to_player(player: Node) -> void:
 	player.max_health = player_max_health
 	player.current_health = clampi(player_health, 0, player.max_health)
 	player.cigarettes = cigarettes
