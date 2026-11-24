@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://ocpjbdoqtvjo"
+path="res://.godot/imported/CarvedWood.fnt-c1b10b8a4d958ab66a78daea8a3e4465.fontdata"
+
+[deps]
+
+source_file="res://asset/fonts/CarvedWood.fnt"
+dest_files=["res://.godot/imported/CarvedWood.fnt-c1b10b8a4d958ab66a78daea8a3e4465.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

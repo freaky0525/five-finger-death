@@ -116,6 +116,10 @@ func fire_bullet():
 	b.global_position = muzzle.global_position
 	b.direction = muzzle.global_position.direction_to(player.global_position)
 	b.rotation = b.direction.angle()
+	# Bullet records its spawn point inside _ready, before this position is set.
+	# Without a reset, a muzzle at x=7000 is already past the travel cap and the shot dies instantly.
+	if b.has_method("setup_travel_limit"):
+		b.setup_travel_limit(4800.0)
 
 # --- ATTACK 2: DASHING ---
 func start_dash_sequence():

@@ -1,299 +1,310 @@
-[gd_scene load_steps=16 format=3 uid="uid://df0mqs4nxqvf0"]
+[gd_scene load_steps=14 format=3 uid="uid://df0mqs4nxqvf0"]
 
-[ext_resource type="Script" uid="uid://cotpuci184tdr" path="res://scenes/menu/main_menu.gd" id="1_i26rj"]
-[ext_resource type="Texture2D" uid="uid://b4cniplho6rim" path="res://asset/ui/main_menu_bg.png" id="2_h7a2f"]
-[ext_resource type="Texture2D" uid="uid://bgk0gppdbxfpw" path="res://asset/ui/title_five_finger_death.png" id="3_qoqlk"]
-[ext_resource type="FontFile" uid="uid://d0r54e7cp4ni" path="res://asset/fonts/BlackCasper.ttf" id="4_qoqlk"]
+[ext_resource type="Script" uid="uid://cotpuci184tdr" path="res://scenes/menu/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://b8nihx6wt5hpd" path="res://asset/ui/main_menu/table.jpg" id="2_table"]
+[ext_resource type="Texture2D" uid="uid://beutdcatryc6w" path="res://asset/ui/main_menu/hand.png" id="3_hand"]
+[ext_resource type="Texture2D" uid="uid://bwspdurep47gl" path="res://asset/ui/main_menu/hand_shadow.png" id="4_shadow"]
+[ext_resource type="Texture2D" uid="uid://cj0xee8akll4d" path="res://asset/ui/main_menu/knife.png" id="5_knife"]
+[ext_resource type="Texture2D" uid="uid://beyf5y1054pur" path="res://asset/ui/main_menu/splinter.png" id="6_splinter"]
+[ext_resource type="Shader" uid="uid://c2trk31rj6feq" path="res://ui/main_menu_wrist.gdshader" id="7_wrist"]
+[ext_resource type="Shader" uid="uid://vpxmbacpxwhs" path="res://ui/main_menu_vignette.gdshader" id="8_vignette"]
+[ext_resource type="FontFile" uid="uid://ocpjbdoqtvjo" path="res://asset/fonts/CarvedWood.fnt" id="9_prong"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwfq2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vignette"]
+shader = ExtResource("8_vignette")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7r1g0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+shader = ExtResource("7_wrist")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/fade_end = 0.09
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cqjrg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_photo"]
+shader = ExtResource("7_wrist")
+shader_parameter/tint = Color(1.05, 0.94, 0.86, 1)
+shader_parameter/fade_end = 0.09
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2xy7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fimr5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u7cqb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoqlk"]
-bg_color = Color(0, 0, 0, 0.333333)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_31qfy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qie43"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61cf8"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qoqlk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hit"]
 
 [node name="MainMenu" type="Control"]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_i26rj")
+script = ExtResource("1_menu")
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_h7a2f")
+[node name="Stage" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -4.0
+offset_right = 1914.0
+offset_bottom = 1076.0
+mouse_filter = 2
+
+[node name="Wood" type="TextureRect" parent="Stage"]
+layout_mode = 0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 1968.0
+offset_bottom = 1128.0
+mouse_filter = 2
+texture = ExtResource("2_table")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_lock_ = true
 
-[node name="DarkOverlay" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.392157)
+[node name="Vignette" type="ColorRect" parent="Stage"]
+material = SubResource("ShaderMaterial_vignette")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
-[node name="Title" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -675.0
-offset_top = 149.0
-offset_right = 1496.39
-offset_bottom = 873.0
-grow_horizontal = 2
-scale = Vector2(0.655, 0.655)
-texture = ExtResource("3_qoqlk")
+[node name="Hand" type="Node2D" parent="Stage"]
+position = Vector2(283, 735)
+rotation = -0.244346
+
+[node name="Shadow" type="TextureRect" parent="Stage/Hand"]
+modulate = Color(0, 0, 0, 0.36)
+material = SubResource("ShaderMaterial_shadow")
+offset_left = -542.4
+offset_top = -576.8
+offset_right = 768.32
+offset_bottom = 406.24
+mouse_filter = 2
+texture = ExtResource("4_shadow")
 expand_mode = 1
-stretch_mode = 6
+metadata/_edit_lock_ = true
 
-[node name="Menu" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -810.0
-offset_top = -560.0
-offset_right = -550.0
-offset_bottom = -322.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Photo" type="TextureRect" parent="Stage/Hand"]
+material = SubResource("ShaderMaterial_photo")
+offset_left = -550.4
+offset_top = -588.8
+offset_right = 760.32
+offset_bottom = 394.24
+mouse_filter = 2
+texture = ExtResource("3_hand")
+expand_mode = 1
+metadata/_edit_lock_ = true
 
-[node name="NewGame" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
+[node name="new_game" type="Label" parent="Stage/Hand"]
+z_index = 3
+offset_left = 225.527
+offset_top = -433.311
+offset_right = 702.527
+offset_bottom = -337.311
+rotation = -0.487597
+scale = Vector2(1.17177, 1.08796)
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.72)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("9_prong")
+theme_override_font_sizes/font_size = 64
 text = "NEW GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ChooseLevel" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "CHOOSE LEVEL"
-
-[node name="Options" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "OPTIONS"
-
-[node name="Quit" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "QUIT
-"
-
-[node name="LevelPicker" type="VBoxContainer" parent="."]
-visible = false
+[node name="Hit" type="Button" parent="Stage/Hand/new_game"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -810.0
-offset_top = -760.0
-offset_right = -550.0
-offset_bottom = -322.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hit")
+flat = true
+metadata/_edit_lock_ = true
 
-[node name="TutorialButton" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "TUTORIAL"
+[node name="Knife_new_game" type="Sprite2D" parent="Stage/Hand"]
+modulate = Color(1, 1, 1, 0.45)
+z_index = 5
+position = Vector2(308.798, -304.335)
+rotation = -0.0993887
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
 
-[node name="Level1Button" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "LEVEL 1"
+[node name="continue" type="Label" parent="Stage/Hand"]
+z_index = 3
+offset_left = 453.161
+offset_top = -217.841
+offset_right = 920.161
+offset_bottom = -144.952
+rotation = -0.20944
+scale = Vector2(0.821128, 0.857075)
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.72)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("9_prong")
+theme_override_font_sizes/font_size = 64
+text = "CONTINUE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level2Button" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "LEVEL 2"
+[node name="Hit" type="Button" parent="Stage/Hand/continue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hit")
+flat = true
+metadata/_edit_lock_ = true
 
-[node name="JapanButton" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "JAPAN"
+[node name="Knife_continue" type="Sprite2D" parent="Stage/Hand"]
+modulate = Color(1, 1, 1, 0.45)
+z_index = 5
+position = Vector2(572.25, -211.853)
+rotation = 0.482814
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
 
-[node name="BossArenaButton" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "BOSS ARENA"
+[node name="options" type="Label" parent="Stage/Hand"]
+z_index = 3
+offset_left = 455.24
+offset_top = 1.1672
+offset_right = 860.24
+offset_bottom = 74.0561
+rotation = 0.139626
+scale = Vector2(0.805283, 0.796914)
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.72)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("9_prong")
+theme_override_font_sizes/font_size = 64
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="LevelPicker"]
-custom_minimum_size = Vector2(420, 70)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_qoqlk")
-theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iwfq2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7r1g0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cqjrg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_e2xy7")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fimr5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u7cqb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qoqlk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_31qfy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qie43")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_61cf8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qoqlk")
-text = "BACK"
+[node name="Hit" type="Button" parent="Stage/Hand/options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hit")
+flat = true
+metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="Menu/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="Menu/ChooseLevel" to="." method="_on_choose_level_pressed"]
-[connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="LevelPicker/TutorialButton" to="." method="_on_tutorial_pressed"]
-[connection signal="pressed" from="LevelPicker/Level1Button" to="." method="_on_level_1_pressed"]
-[connection signal="pressed" from="LevelPicker/Level2Button" to="." method="_on_level_2_pressed"]
-[connection signal="pressed" from="LevelPicker/JapanButton" to="." method="_on_japan_pressed"]
-[connection signal="pressed" from="LevelPicker/BossArenaButton" to="." method="_on_boss_arena_pressed"]
-[connection signal="pressed" from="LevelPicker/BackButton" to="." method="_on_level_back_pressed"]
+[node name="Knife_options" type="Sprite2D" parent="Stage/Hand"]
+modulate = Color(1, 1, 1, 0.45)
+z_index = 5
+position = Vector2(578.205, -0.123287)
+rotation = 0.782061
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
+
+[node name="exit" type="Label" parent="Stage/Hand"]
+z_index = 3
+offset_left = 350.587
+offset_top = 193.564
+offset_right = 630.587
+offset_bottom = 266.453
+rotation = 0.612025
+scale = Vector2(0.687007, 0.70415)
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.72)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("9_prong")
+theme_override_font_sizes/font_size = 64
+text = "EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hit" type="Button" parent="Stage/Hand/exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hit")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hit")
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="MiddleFinger" type="Marker2D" parent="Stage/Hand"]
+position = Vector2(420, -90)
+rotation = 0.63
+
+[node name="Knife_exit" type="Sprite2D" parent="Stage/Hand"]
+modulate = Color(1, 1, 1, 0.45)
+z_index = 5
+position = Vector2(498.776, 194.441)
+rotation = 1.13795
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
+
+[node name="Knife" type="Sprite2D" parent="Stage/Hand"]
+visible = false
+z_index = 6
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="Stage/Hand/Knife"]
+modulate = Color(0, 0, 0, 0.45)
+z_index = -1
+position = Vector2(14, 16)
+texture = ExtResource("5_knife")
+offset = Vector2(203.5, -466.5)
+metadata/_edit_lock_ = true
+
+[node name="Splinter" type="TextureRect" parent="Stage/Hand"]
+z_index = 7
+offset_left = 478.0
+offset_top = -97.0
+offset_right = 604.0
+offset_bottom = 85.0
+pivot_offset = Vector2(104, 117.5)
+mouse_filter = 2
+texture = ExtResource("6_splinter")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Flash" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.96, 0.9, 0)
+metadata/_edit_lock_ = true

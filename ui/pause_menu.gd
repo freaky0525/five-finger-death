@@ -104,7 +104,10 @@ const FINGERS := [
 	},
 ]
 
+signal dismissed
+
 var _page := Page.HAND
+var _from_main_menu := false
 var _player_was_locked := false
 var _busy := false
 var _idle := false
@@ -126,6 +129,10 @@ var _hit_debug: Dictionary = {}
 
 @export var show_hitboxes := false
 
+const _GAME_DIM := Color(0, 0, 0, 0.32)
+const _MENU_DIM := Color(0, 0, 0, 1)
+
+@onready var dim: ColorRect = $Dim
 @onready var frames: TextureRect = $Frames
 @onready var flash: ColorRect = $Flash
 @onready var interact: Control = $Interact
@@ -243,10 +250,24 @@ func open() -> void:
 
 	var player := get_tree().get_first_node_in_group("player")
 	_player_was_locked = player != null and ("menu_locked" in player) and player.menu_locked
+	_from_main_menu = false
+	dim.color = _GAME_DIM
 	visible = true
 	get_tree().paused = true
 	_lock_player(true)
 	_set_health_hud_visible(false)
+	_hide_subpage()
+	_play_jumpscare()
+
+
+func open_from_main_menu() -> void:
+	if visible:
+		return
+	_from_main_menu = true
+	_player_was_locked = false
+	dim.color = _MENU_DIM
+	visible = true
+	get_tree().paused = true
 	_hide_subpage()
 	_play_jumpscare()
 
@@ -259,6 +280,7 @@ func close() -> void:
 
 func _finish_close() -> void:
 	_stop_idle()
+	dim.color = _GAME_DIM
 	visible = false
 	_busy = false
 	_hover_id = ""
@@ -269,6 +291,10 @@ func _finish_close() -> void:
 	_set_health_hud_visible(true)
 	get_tree().paused = false
 	_lock_player(_player_was_locked)
+	var from_menu := _from_main_menu
+	_from_main_menu = false
+	if from_menu:
+		dismissed.emit()
 
 
 func _on_pause_pressed() -> void:
@@ -429,6 +455,9 @@ func _set_menu_ui_visible(show_ui: bool) -> void:
 
 
 func _exit_to_menu() -> void:
+	if _from_main_menu:
+		close()
+		return
 	if _busy:
 		return
 	_busy = true
@@ -447,7 +476,7 @@ func _exit_to_menu() -> void:
 	get_tree().paused = false
 	_lock_player(_player_was_locked)
 	GameState.reset()
-	get_tree().change_scene_to_file(MAIN_MENU_PATH)
+	SceneTransition.change_scene(MAIN_MENU_PATH)
 
 
 func _on_volume_changed(value: float) -> void:

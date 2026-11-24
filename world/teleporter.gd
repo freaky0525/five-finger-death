@@ -31,7 +31,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player" or body.is_in_group("player"):
 		GameState.save_from_player(body)
 		_free_orphan_level_entities()
-		get_tree().call_deferred("change_scene_to_file", target_scene)
+		SceneTransition.change_scene(target_scene)
 
 
 func _free_orphan_level_entities() -> void:

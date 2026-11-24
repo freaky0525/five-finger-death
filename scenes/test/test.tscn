@@ -1,0 +1,408 @@
+[gd_scene load_steps=27 format=3 uid="uid://bkwe81eawo2yw"]
+
+[ext_resource type="Script" uid="uid://c7serg6kjhvr4" path="res://scenes/test/test.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b0nmetuschimb" path="res://asset/wedding/17_distant_panorama_wide.png" id="2_pano"]
+[ext_resource type="Texture2D" uid="uid://gjkyk7355as8" path="res://asset/wedding/16_ground_horizontal.png" id="3_lawn"]
+[ext_resource type="Texture2D" uid="uid://cipdop6i0vxuw" path="res://asset/wedding/03_rear_garden_border.png" id="4_border"]
+[ext_resource type="Texture2D" uid="uid://cets1wbbh2qg1" path="res://asset/wedding/04_tree_left.png" id="5_treel"]
+[ext_resource type="Texture2D" uid="uid://doiwdy7kc8j5j" path="res://asset/wedding/05_tree_right.png" id="6_treer"]
+[ext_resource type="Texture2D" uid="uid://bh3v6bw1bw024" path="res://asset/wedding/06_wedding_arch.png" id="7_arch"]
+[ext_resource type="Texture2D" uid="uid://pqhi48y2l0mk" path="res://asset/wedding/07_flower_pedestal.png" id="8_ped"]
+[ext_resource type="Texture2D" uid="uid://dld8u1q36gbtd" path="res://asset/wedding/08_ceremony_rug.png" id="9_rug"]
+[ext_resource type="Texture2D" uid="uid://c14ick0tcxqcm" path="res://asset/wedding/09_guest_chair.png" id="10_chair"]
+[ext_resource type="Texture2D" uid="uid://x3b3n8dpwhvk" path="res://asset/wedding/10_foreground_flower_border.png" id="11_flowers"]
+[ext_resource type="Texture2D" uid="uid://do21f3g18wy2m" path="res://asset/wedding/11_groom_hand.png" id="12_groom"]
+[ext_resource type="Texture2D" uid="uid://biodm3b75nqyg" path="res://asset/wedding/12_bride_hand.png" id="13_bride"]
+[ext_resource type="Texture2D" uid="uid://t2w4d5rttsi" path="res://asset/wedding/13_clapping_hands_formal.png" id="14_formal"]
+[ext_resource type="Texture2D" uid="uid://bkibg65th43g6" path="res://asset/wedding/14_clapping_hands_lace.png" id="15_lace"]
+[ext_resource type="Texture2D" uid="uid://bxccsanaf6hh8" path="res://asset/wedding/15_rose_petal.png" id="16_petal"]
+[ext_resource type="Texture2D" uid="uid://bcsu5g8am3glp" path="res://asset/wedding/22_groom_kiss.png" id="17_kiss"]
+[ext_resource type="Texture2D" uid="uid://dk3jwhkpnfpnf" path="res://asset/wedding/18_exit_fence.png" id="18_fence"]
+[ext_resource type="Texture2D" uid="uid://jgtvb6ncl3sb" path="res://asset/wedding/19_exit_direction_post.png" id="19_post"]
+[ext_resource type="Texture2D" uid="uid://cntijgyhwpwk0" path="res://asset/wedding/20_dummy_wood_hand.png" id="20_dummy"]
+[ext_resource type="PackedScene" uid="uid://cepo2xhyk4vm8" path="res://Player/player.tscn" id="21_player"]
+[ext_resource type="AudioStream" uid="uid://cpynyctj5mk0d" path="res://asset/audio/Five Finger Death bg music.mp3" id="22_music"]
+[ext_resource type="Script" uid="uid://je8mfeokm17f" path="res://scenes/test/wedding_dummy.gd" id="23_dummy"]
+[ext_resource type="Texture2D" uid="uid://cff1o01aymc1j" path="res://asset/wedding/23_bride_kiss.png" id="24_bkiss"]
+[ext_resource type="Texture2D" uid="uid://bhs5ec2hkn1i4" path="res://asset/wedding/21_dummy_gimme_five_sign.png" id="25_sign"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
+content_margin_left = 22.0
+content_margin_top = 14.0
+content_margin_right = 22.0
+content_margin_bottom = 14.0
+bg_color = Color(0.05, 0.04, 0.03, 0.78)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.92, 0.75, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Panorama" type="Sprite2D" parent="."]
+z_index = -30
+position = Vector2(1920, 314)
+scale = Vector2(1.88, 1.88)
+texture = ExtResource("2_pano")
+
+[node name="TreeLeft" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(120, 80)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("5_treel")
+
+[node name="TreeRight" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(1800, 60)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_treer")
+
+[node name="TreeExit" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(3320, 30)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_treer")
+
+[node name="Lawn" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(1705, 533)
+scale = Vector2(1.57, 1.57)
+texture = ExtResource("3_lawn")
+
+[node name="LawnMirror" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(5114, 533)
+scale = Vector2(-1.57, 1.57)
+texture = ExtResource("3_lawn")
+
+[node name="Border" type="Sprite2D" parent="."]
+z_index = -16
+position = Vector2(960, 318)
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("4_border")
+
+[node name="BorderRight" type="Sprite2D" parent="."]
+z_index = -16
+position = Vector2(2860, 318)
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("4_border")
+
+[node name="Fence" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(3050, 250)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("18_fence")
+
+[node name="PedestalLeft" type="Sprite2D" parent="."]
+z_index = -12
+position = Vector2(690, 300)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_ped")
+
+[node name="PedestalRight" type="Sprite2D" parent="."]
+z_index = -12
+position = Vector2(1230, 300)
+scale = Vector2(-0.2, 0.2)
+texture = ExtResource("8_ped")
+
+[node name="Arch" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(960, 248)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_arch")
+
+[node name="Rug" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(960, 690)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("9_rug")
+
+[node name="ChairL1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(70, 980)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("10_chair")
+
+[node name="ChairL2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(250, 1040)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("10_chair")
+
+[node name="ChairR1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1680, 1040)
+scale = Vector2(-0.46, 0.46)
+texture = ExtResource("10_chair")
+
+[node name="ChairR2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1860, 980)
+scale = Vector2(-0.38, 0.38)
+texture = ExtResource("10_chair")
+
+[node name="ClapL1" type="Sprite2D" parent="." groups=["clapper"]]
+z_index = 4
+position = Vector2(180, 860)
+rotation = -0.1
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("14_formal")
+
+[node name="ClapL2" type="Sprite2D" parent="." groups=["clapper"]]
+modulate = Color(1, 0.97, 0.94, 1)
+z_index = 5
+position = Vector2(40, 980)
+rotation = 0.08
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("14_formal")
+
+[node name="ClapL3" type="Sprite2D" parent="." groups=["clapper"]]
+z_index = 4
+position = Vector2(430, 980)
+rotation = 0.12
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("15_lace")
+
+[node name="ClapR1" type="Sprite2D" parent="." groups=["clapper"]]
+z_index = 4
+position = Vector2(1500, 900)
+rotation = -0.06
+scale = Vector2(-0.34, 0.34)
+texture = ExtResource("14_formal")
+
+[node name="ClapR2" type="Sprite2D" parent="." groups=["clapper"]]
+modulate = Color(1, 0.96, 0.95, 1)
+z_index = 5
+position = Vector2(1760, 860)
+rotation = 0.05
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("15_lace")
+
+[node name="ClapR3" type="Sprite2D" parent="." groups=["clapper"]]
+z_index = 6
+position = Vector2(1920, 1000)
+rotation = -0.1
+scale = Vector2(-0.48, 0.48)
+texture = ExtResource("15_lace")
+
+[node name="FlowerL" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(520, 980)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("11_flowers")
+
+[node name="FlowerR" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(1500, 990)
+scale = Vector2(-0.66, 0.66)
+texture = ExtResource("11_flowers")
+
+[node name="FlowerFar" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(2860, 1020)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("11_flowers")
+
+[node name="Post" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(3793, 814)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("19_post")
+
+[node name="Dummy" type="Node2D" parent="."]
+z_index = 6
+position = Vector2(2680, 780)
+script = ExtResource("23_dummy")
+
+[node name="Body" type="Sprite2D" parent="Dummy"]
+position = Vector2(680, -186)
+scale = Vector2(0.42, 0.42)
+texture = ExtResource("20_dummy")
+
+[node name="Sign" type="Sprite2D" parent="Dummy"]
+z_index = 1
+position = Vector2(858, -104)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("25_sign")
+
+[node name="Player" parent="." instance=ExtResource("21_player")]
+visible = false
+z_index = 7
+position = Vector2(1120, 620)
+
+[node name="GroomRig" type="Node2D" parent="."]
+position = Vector2(760, 600)
+
+[node name="Suit" type="Sprite2D" parent="GroomRig"]
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("12_groom")
+
+[node name="Kiss" type="Sprite2D" parent="GroomRig"]
+visible = false
+z_index = 1
+position = Vector2(-201, -18)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("17_kiss")
+
+[node name="BrideRig" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(1168, 622)
+
+[node name="Body" type="Sprite2D" parent="BrideRig"]
+scale = Vector2(0.415, 0.415)
+texture = ExtResource("13_bride")
+
+[node name="Kiss" type="Sprite2D" parent="BrideRig"]
+visible = false
+z_index = 1
+position = Vector2(150, 24)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("24_bkiss")
+
+[node name="HenchA" type="Sprite2D" parent="."]
+modulate = Color(0.1, 0.09, 0.11, 1)
+z_index = 20
+position = Vector2(2400, 560)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("14_formal")
+
+[node name="HenchB" type="Sprite2D" parent="."]
+modulate = Color(0.08, 0.08, 0.1, 1)
+z_index = 20
+position = Vector2(2500, 720)
+scale = Vector2(-0.48, 0.48)
+texture = ExtResource("14_formal")
+
+[node name="Petals" type="CPUParticles2D" parent="."]
+z_index = 3
+position = Vector2(1920, -20)
+amount = 20
+texture = ExtResource("16_petal")
+lifetime = 8.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 20)
+direction = Vector2(0.2, 1)
+spread = 26.0
+gravity = Vector2(12, 20)
+initial_velocity_min = 16.0
+initial_velocity_max = 44.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+scale_amount_min = 0.028
+scale_amount_max = 0.05
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_music")
+volume_db = -10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Story" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_top = 28.0
+offset_right = 640.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.97, 0.9, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BrideLine" type="Label" parent="CanvasLayer"]
+offset_right = 400.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(1, 0.9, 0.92, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rage" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -80.0
+offset_right = 520.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 76
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pop" type="Label" parent="CanvasLayer"]
+visible = false
+offset_right = 260.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(1, 0.78, 0.84, 1)
+theme_override_font_sizes/font_size = 100
+text = "啵"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Prompt" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -156.0
+offset_right = 380.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_prompt")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Prompt"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Hint" type="Label" parent="CanvasLayer/Prompt/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.88, 1)
+theme_override_font_sizes/font_size = 28
+text = "按住 D 往前推，或按住左鍵往右拖"
+horizontal_alignment = 1
+
+[node name="Track" type="ColorRect" parent="CanvasLayer/Prompt/VBox"]
+custom_minimum_size = Vector2(640, 12)
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.22)
+
+[node name="Fill" type="ColorRect" parent="CanvasLayer/Prompt/VBox/Track"]
+layout_mode = 0
+offset_bottom = 12.0
+mouse_filter = 2
+color = Color(0.96, 0.8, 0.38, 1)
+
+[node name="Flash" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)

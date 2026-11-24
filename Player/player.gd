@@ -222,7 +222,7 @@ func die() -> void:
 	_reset_wave_borders()
 	set_physics_process(false)
 	set_process(false)
-	get_tree().call_deferred("reload_current_scene")
+	SceneTransition.reload_current()
 
 
 func _reset_wave_borders() -> void:

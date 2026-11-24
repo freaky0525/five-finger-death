@@ -175,4 +175,4 @@ func _finish_tutorial() -> void:
 	GameState.player_health = player.max_health
 	GameState.save_from_player(player)
 	await get_tree().create_timer(3.0).timeout
-	get_tree().change_scene_to_file(level_1_path)
+	SceneTransition.change_scene(level_1_path)
